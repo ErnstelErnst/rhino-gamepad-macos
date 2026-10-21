@@ -1,0 +1,27 @@
+{
+  "name": "rhino-gamepad-agent-link",
+  "displayName": "Rhino Gamepad Agent Link",
+  "publisher": "localtools",
+  "description": "Route Rhino Gamepad voice drafts to an explicitly bound VS Code terminal with idempotent delivery.",
+  "version": "0.5.5",
+  "engines": {"vscode": "^1.90.0"},
+  "categories": ["Other"],
+  "main": "./extension.js",
+  "activationEvents": ["onCommand:rhinoGamepad.bindTerminal", "onCommand:rhinoGamepad.preview", "onCommand:rhinoGamepad.toggleSubmit", "onCommand:rhinoGamepad.disconnect"],
+  "contributes": {
+    "commands": [
+      {"command":"rhinoGamepad.bindTerminal","title":"Rhino Gamepad: Bind Agent Terminal"},
+      {"command":"rhinoGamepad.preview","title":"Rhino Gamepad: Review / Edit Voice Draft"},
+      {"command":"rhinoGamepad.toggleSubmit","title":"Rhino Gamepad: Toggle Auto-Submit (Session Only)"},
+      {"command":"rhinoGamepad.disconnect","title":"Rhino Gamepad: Disconnect Agent Terminal"}
+    ],
+    "configuration": {
+      "title":"Rhino Gamepad Agent Link",
+      "properties": {
+        "rhinoGamepad.autoSend":{"type":"boolean","default":false,"description":"Automatically send completed dictations to the designated terminal. No A confirmation. Does not independently press Enter."},
+        "rhinoGamepad.autoSubmit":{"type":"boolean","default":false,"description":"DANGER: Append Enter to voice prompts. Only enable if you understand that a CLI agent may have exited to a normal shell."},
+        "rhinoGamepad.draftTTLSeconds":{"type":"number","default":60,"minimum":15,"maximum":600,"description":"Expire unsubmitted voice drafts after this many seconds."}
+      }
+    }
+  }
+}
